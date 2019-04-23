@@ -1,0 +1,58 @@
+{
+  "CategoryBackground": {
+    "01": {
+      "ImageLink": "https://i.pinimg.com/564x/05/cf/6f/05cf6f93e9021ca4e582ce1b0c329fb5.jpg",
+      "name": "Abstract"
+    },
+    "02": {
+      "ImageLink": "https://i.pinimg.com/564x/8a/40/1f/8a401fc895297c555cb7e19c3e5f777f.jpg",
+      "name": "Be Together"
+    },
+    "03": {
+      "ImageLink": "https://i.pinimg.com/736x/d7/11/f7/d711f709fac6fbcf8337cb5bcb4746d4.jpg",
+      "name": "Earth"
+    },
+    "04": {
+      "ImageLink": "https://i.pinimg.com/564x/db/d4/a7/dbd4a7ac8720ece2a8fc53561cad085f.jpg",
+      "name": "Food"
+    },
+    "05": {
+      "ImageLink": "https://i.pinimg.com/564x/0d/51/6f/0d516fdae393c3d30d05eb1251609cc4.jpg",
+      "name": "Geometric"
+    },
+    "06": {
+      "ImageLink": "https://i.pinimg.com/564x/cf/2a/f4/cf2af422793df009cdb1bf7d3ad08783.jpg",
+      "name": "Material"
+    },
+    "07": {
+      "ImageLink": "https://i.pinimg.com/564x/41/c7/52/41c75274ffa14f3222691c0cbe3c1904.jpg",
+      "name": "Minimal"
+    },
+    "08": {
+      "ImageLink": "https://i.pinimg.com/564x/81/da/0a/81da0a6e8f5978e7a8f4de76863c6206.jpg",
+      "name": "Pattern"
+    },
+    "09": {
+      "ImageLink": "https://i.pinimg.com/564x/20/8d/f5/208df5183f47e8b154be77c153f27b1f.jpg",
+      "name": "Scenery"
+    },
+    "10": {
+      "ImageLink": "https://i.pinimg.com/564x/6e/a3/7b/6ea37b05aa9cc4c1746ae2effe04e3da.jpg",
+      "name": "Space"
+    }
+  },
+  "Wallpapers": {
+    "01": {
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/dopewallpaper-38031.appspot.com/o/Wasted_Times.png?alt=media&token=9bb65e28-f89f-4b21-895b-9593a96c8662",
+      "category": "01"
+    },
+    "02": {
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/dopewallpaper-38031.appspot.com/o/Palm_Breeze.png?alt=media&token=fe94d61d-c01d-4bbf-ae80-817dbe54b72b",
+      "category": "02"
+    },
+    "03": {
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/dopewallpaper-38031.appspot.com/o/Township.jpg?alt=media&token=f787bbeb-be5e-473a-ae0c-19a9f34dca13",
+      "category": "03"
+    }
+  }
+}

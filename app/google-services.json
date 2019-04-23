@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "160289077136",
+    "firebase_url": "https://dopewallpaper-38031.firebaseio.com",
+    "project_id": "dopewallpaper-38031",
+    "storage_bucket": "dopewallpaper-38031.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:160289077136:android:1514597a9b08b312",
+        "android_client_info": {
+          "package_name": "com.example.dopewallpaper"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "160289077136-rob3itjj7isffo4mahvnqhb81vbgpsu3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.dopewallpaper",
+            "certificate_hash": "d02ff2cbeae6da617628bc10faecc68451bd39ec"
+          }
+        },
+        {
+          "client_id": "160289077136-k60jfqc8ee28esv12h6agpcgdf0dmpn6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4a3Yok5VMYK70WlCtjvgblv-gex976Zc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "160289077136-k60jfqc8ee28esv12h6agpcgdf0dmpn6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
