@@ -17,17 +17,6 @@
             android:layout_height="wrap_content"
             android:scaleType="centerCrop" />
 
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_centerHorizontal="true"
-            android:background="#BF333333"
-            android:gravity="center_horizontal"
-            android:text="Category Name"
-            android:textColor="@android:color/white"
-            android:textSize="20sp" />
 
     </RelativeLayout>
 

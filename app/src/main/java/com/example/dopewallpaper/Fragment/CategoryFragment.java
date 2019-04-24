@@ -1,5 +1,6 @@
 package com.example.dopewallpaper.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.example.dopewallpaper.Common.Common;
 import com.example.dopewallpaper.Interface.ItemClickListener;
+import com.example.dopewallpaper.ListWallpaper;
 import com.example.dopewallpaper.Model.CategoryItem;
 import com.example.dopewallpaper.R;
 import com.example.dopewallpaper.ViewHolder.CategoryViewHolder;
@@ -82,7 +84,10 @@ public class CategoryFragment extends Fragment {
                 holder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int position) {
-                        // Code late for detail category
+                        Common.CATEGORY__ID_SELECTED = adapter.getRef(position).getKey(); //get key of the item
+                        Common.CATEGORY_SELECTED = model.getName();
+                        Intent intent = new Intent(getActivity(), ListWallpaper.class);
+                        startActivity(intent);
                     }
                 });
             }

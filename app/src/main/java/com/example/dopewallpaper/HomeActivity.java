@@ -1,11 +1,12 @@
 package com.example.dopewallpaper;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -14,8 +15,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.dopewallpaper.Adapter.MyFragmentAdapter;
+import com.example.dopewallpaper.Common.Common;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -23,6 +26,24 @@ public class HomeActivity extends AppCompatActivity
     ViewPager viewPager;
     TabLayout tabLayout;
 
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        switch (requestCode)
+        {
+            case Common.PERMISSION_REQUEST_CODE:
+            {
+                if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                    Toast.makeText(this, "Permission Granted", Toast. LENGTH_SHORT).show();
+                else
+                    Toast.makeText(this, "You need to accept this permission request", Toast.LENGTH_SHORT).show();
+            }
+            break;
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +53,12 @@ public class HomeActivity extends AppCompatActivity
         toolbar.setTitle("DopeWallpaper");
         setSupportActionBar(toolbar);
 
+        //Request Runtime permission
+        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
+        {
+            requestPermissions(new String[]{ Manifest.permission.WRITE_EXTERNAL_STORAGE}, Common.PERMISSION_REQUEST_CODE);
+        }
+
         viewPager = (ViewPager)findViewById(R.id.viewPager);
         MyFragmentAdapter adapter = new MyFragmentAdapter(getSupportFragmentManager(), this);
         viewPager.setAdapter(adapter);
@@ -39,14 +66,6 @@ public class HomeActivity extends AppCompatActivity
         tabLayout = (TabLayout)findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(viewPager);
 
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

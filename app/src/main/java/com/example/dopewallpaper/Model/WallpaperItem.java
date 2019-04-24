@@ -1,31 +1,31 @@
 package com.example.dopewallpaper.Model;
 
 public class WallpaperItem {
-    public String imageLink;
-    public String categoryId;
+    public String imageUrl;
+    public String category;
 
     public WallpaperItem(){
 
     }
 
-    public WallpaperItem(String imageLink, String categoryId){
-        this.imageLink = imageLink;
-        this.categoryId = categoryId;
+    public WallpaperItem(String imageLink, String category){
+        this.imageUrl = imageUrl;
+        this.category = category;
     }
 
     public String getImageLink() {
-        return imageLink;
+        return imageUrl;
     }
 
     public String getCategoryId() {
-        return categoryId;
+        return category;
     }
 
-    public void setImageLink(String imageLink) {
-        this.imageLink = imageLink;
+    public void setImageLink(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
-    public void setCategoryId(String categoryId) {
-        this.categoryId = categoryId;
+    public void setCategoryId(String category) {
+        this.category = category;
     }
 }

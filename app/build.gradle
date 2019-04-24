@@ -21,6 +21,7 @@ android {
 }
 
 dependencies {
+    implementation 'com.github.d-max:spots-dialog:0.7@aar'
     implementation 'com.flaviofaria:kenburnsview:1.0.7'
     implementation 'com.google.firebase:firebase-core:16.0.8'
     implementation 'com.squareup.picasso:picasso:2.5.2'

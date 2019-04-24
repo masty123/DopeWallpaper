@@ -5,6 +5,7 @@
     android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/black"
     tools:context=".ViewWallpaper">
 
     <android.support.design.widget.AppBarLayout
@@ -87,6 +88,18 @@
         app:pressedTranslationZ="12dp"
         app:layout_anchor="@id/app_bar_Layout"
         app:layout_anchorGravity="bottom|right|end"
+        app:backgroundTint="@android:color/white"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabDownload"
+        android:layout_marginLeft="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_file_download_black_24dp"
+        app:elevation="6dp"
+        app:pressedTranslationZ="12dp"
+        app:layout_anchor="@id/app_bar_Layout"
+        app:layout_anchorGravity="bottom|left|end"
         app:backgroundTint="@android:color/white"/>
 
 </android.support.design.widget.CoordinatorLayout>
