@@ -8,7 +8,7 @@ public class WallpaperItem {
 
     }
 
-    public WallpaperItem(String imageLink, String category){
+    public WallpaperItem(String imageUrl, String category){
         this.imageUrl = imageUrl;
         this.category = category;
     }

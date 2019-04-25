@@ -15,12 +15,17 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.dopewallpaper.Common.Common;
+import com.example.dopewallpaper.Database.DataSource.RecentRepository;
+import com.example.dopewallpaper.Database.LocalDatabase.LocalDatabase;
+import com.example.dopewallpaper.Database.LocalDatabase.RecentsDataSource;
+import com.example.dopewallpaper.Database.Recents;
 import com.example.dopewallpaper.Helper.SaveImageHelper;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
@@ -29,6 +34,15 @@ import java.io.IOException;
 import java.util.UUID;
 
 import dmax.dialog.SpotsDialog;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 public class ViewWallpaper extends AppCompatActivity {
 
@@ -36,6 +50,12 @@ public class ViewWallpaper extends AppCompatActivity {
     FloatingActionButton floatingActionButton, fabDownload;
     ImageView imageView;
     CoordinatorLayout rootLayout;
+
+    //Room Database
+    CompositeDisposable compositeDisposable;
+    RecentRepository recentRepository;
+
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -91,16 +111,23 @@ public class ViewWallpaper extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_wallpaper);
+
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if(getSupportActionBar() != null)
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        //Init RoomDatabase
+        compositeDisposable = new CompositeDisposable();
+        LocalDatabase database = LocalDatabase.getInstance(this);
+        recentRepository = RecentRepository.getInstance(RecentsDataSource.getInstance(database.recentsDAO()));
+
+
         //Init
         rootLayout = (CoordinatorLayout)findViewById(R.id.rootLayout);
         collapsingToolbarLayout = (CollapsingToolbarLayout)findViewById(R.id.collapsing);
         collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.CollapseAppBar);
-        collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.ExpandedAppBar);
+        collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.ExpandedAppBar);
 
         collapsingToolbarLayout.setTitle(Common.CATEGORY_SELECTED);
 
@@ -108,6 +135,9 @@ public class ViewWallpaper extends AppCompatActivity {
         Picasso.with(this)
                 .load(Common.select_background.getImageLink())
                 .into(imageView);
+
+        //add to Recents
+         addToRecents();
 
         floatingActionButton = (FloatingActionButton)findViewById(R.id.fabWallpaper);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
@@ -125,7 +155,7 @@ public class ViewWallpaper extends AppCompatActivity {
             public void onClick(View v) {
                 //Check permission
                 //Request Runtime permission
-                if(ActivityCompat.checkSelfPermission(ViewWallpaper.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
+                if(ActivityCompat.checkSelfPermission(ViewWallpaper.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
                 {
                     requestPermissions(new String[]{ Manifest.permission.WRITE_EXTERNAL_STORAGE}, Common.PERMISSION_REQUEST_CODE);
                 }
@@ -146,9 +176,52 @@ public class ViewWallpaper extends AppCompatActivity {
 
     }
 
+    private void addToRecents() {
+        Disposable disposable = Observable.create(new ObservableOnSubscribe<Object>() {
+
+            @Override
+            public void subscribe(ObservableEmitter<Object> e) throws Exception {
+                Recents recents = new Recents(
+                        Common.select_background.getImageLink(),
+                        Common.select_background.getCategoryId(),
+                        String.valueOf(System.currentTimeMillis()));
+                recentRepository.insertRecents(recents);
+                e.onComplete();
+            }
+
+
+        }).observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Consumer<Object>() {
+
+                    @Override
+                    public void accept(Object o) throws Exception {
+
+                    }
+                }, new Consumer<Throwable>(){
+
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                            Log.e("Error", throwable.getMessage());
+                    }
+
+                 }, new Action(){
+
+                    @Override
+                    public void run() throws Exception {
+
+                    }
+
+        });
+
+        compositeDisposable.add(disposable);
+
+    }
+
     @Override
     protected void onDestroy() {
         Picasso.with(this).cancelRequest(target);
+        compositeDisposable.clear();
         super.onDestroy();
 
     }

@@ -32,7 +32,7 @@ public class MyFragmentAdapter extends FragmentPagerAdapter {
         }
 
         else if (position == 2){
-            return RecentFragment.getInstance();
+            return RecentFragment.getInstance(context);
 
         }
         return null;

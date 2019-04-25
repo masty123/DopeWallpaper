@@ -39,7 +39,7 @@ public class HomeActivity extends AppCompatActivity
                 if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
                     Toast.makeText(this, "Permission Granted", Toast. LENGTH_SHORT).show();
                 else
-                    Toast.makeText(this, "You need to accept this permission request", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "You need to accept this permission request to download images", Toast.LENGTH_SHORT).show();
             }
             break;
         }
