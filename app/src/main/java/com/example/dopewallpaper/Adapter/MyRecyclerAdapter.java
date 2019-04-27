@@ -79,12 +79,12 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<ListWallpaperViewHol
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onClick(View view, int position) {
-                // Toast.makeText(ListWallpaper.this, "Implement soon", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(context, ViewWallpaper.class);
                 WallpaperItem wallpaperItem = new WallpaperItem();
                 wallpaperItem.setCategoryId(recents.get(i).getCategory());
                 wallpaperItem.setImageLink(recents.get(i).getImageUrl());
                 Common.select_background = wallpaperItem;
+                Common.select_background_key = recents.get(i).getKey();
                 context.startActivity(intent);
             }
         });

@@ -8,8 +8,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.example.dopewallpaper.Fragment.CategoryFragment;
 import com.example.dopewallpaper.Fragment.RecentFragment;
-import com.example.dopewallpaper.Fragment.WOTDFragment;
-import com.google.firebase.FirebaseApp;
+import com.example.dopewallpaper.Fragment.TrendingFragment;
 
 public class MyFragmentAdapter extends FragmentPagerAdapter {
 
@@ -27,7 +26,7 @@ public class MyFragmentAdapter extends FragmentPagerAdapter {
 
         }
         else if (position == 1){
-            return WOTDFragment.getInstance();
+            return TrendingFragment.getInstance();
 
         }
 
@@ -50,7 +49,7 @@ public class MyFragmentAdapter extends FragmentPagerAdapter {
             case 0:
                 return "Category";
             case 1:
-                return "Wallpaper of the Day";
+                return "Trending";
             case 2:
                 return "Recents";
         }

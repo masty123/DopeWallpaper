@@ -9,5 +9,7 @@ public class Common {
     public static String STR_WALLPAPER = "Wallpapers";
     public static final int PERMISSION_REQUEST_CODE = 1000;
 
+    public static String select_background_key;
+
     public static WallpaperItem select_background = new WallpaperItem();
 }

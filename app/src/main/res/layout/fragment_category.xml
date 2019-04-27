@@ -5,13 +5,6 @@
     android:layout_height="match_parent"
     tools:context=".Fragment.CategoryFragment">
 
-    <!--&lt;!&ndash; TODO: Update blank fragment layout &ndash;&gt;-->
-    <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="Category Fragment"-->
-        <!--android:textSize="30sp"-->
-        <!--android:layout_centerInParent="true"/>-->
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_category"

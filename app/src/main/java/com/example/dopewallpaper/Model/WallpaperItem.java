@@ -3,10 +3,9 @@ package com.example.dopewallpaper.Model;
 public class WallpaperItem {
     public String imageUrl;
     public String category;
+    public long viewCount;
 
-    public WallpaperItem(){
-
-    }
+    public WallpaperItem(){ }
 
     public WallpaperItem(String imageUrl, String category){
         this.imageUrl = imageUrl;
@@ -28,4 +27,8 @@ public class WallpaperItem {
     public void setCategoryId(String category) {
         this.category = category;
     }
+
+    public long getViewCount() { return viewCount; }
+
+    public void setViewCount(long viewCount) { this.viewCount = viewCount; }
 }
