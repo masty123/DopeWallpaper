@@ -3,7 +3,6 @@ package com.example.dopewallpaper;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -69,9 +68,9 @@ public class ListWallpaper extends AppCompatActivity {
         adapter = new FirebaseRecyclerAdapter<WallpaperItem, ListWallpaperViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull final ListWallpaperViewHolder holder, int position, @NonNull final WallpaperItem model) {
-                Picasso.with(getBaseContext())
+                //Picasso.get()
+                Picasso.with(getApplicationContext())
                         .load(model.getImageLink())
-                        .networkPolicy(NetworkPolicy.OFFLINE)
                         .into(holder.wallpaper, new Callback() {
 
                             @Override
@@ -81,7 +80,11 @@ public class ListWallpaper extends AppCompatActivity {
 
                             @Override
                             public void onError() {
-                                Picasso.with(getBaseContext())
+
+//                            public void onError(Exception ex) {
+                                Picasso.with(getApplicationContext())
+
+//                                Picasso.get()
                                         .load(model.getImageLink())
                                         .error(R.drawable.ic_terrain_black_24dp)
                                         .into(holder.wallpaper, new Callback() {
@@ -92,6 +95,8 @@ public class ListWallpaper extends AppCompatActivity {
 
                                             @Override
                                             public void onError() {
+
+//                                            public void onError(Exception ex) {
                                                 Log.e("ERROR_DW", "Could not fetch the image.");
                                             }
                                         });

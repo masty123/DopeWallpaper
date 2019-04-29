@@ -26,10 +26,11 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_list_wallpaper"
-        android:layout_below="@+id/app_bar"
-        android:clipToPadding="false"
-        android:padding="0dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+        android:layout_height="match_parent"
+        android:layout_below="@+id/app_bar"
+        android:background="@drawable/com_facebook_auth_dialog_header_background"
+        android:clipToPadding="false"
+        android:padding="0dp"></android.support.v7.widget.RecyclerView>
 
 </RelativeLayout>

@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.dopewallpaper">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
 
     <application
         android:allowBackup="true"
@@ -13,11 +15,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/FullScreenTheme">
+        <activity android:name=".UploadWallpaper"></activity>
+
+
+
+        <meta-data xmlns:tools="http://schemas.android.com/tools"
+        android:id="@string/facebook_app_id"
+        android:name="com.facebook.sdk.ApplicationId"
+        android:value="406427876806424"
+        tools:replace="android:value" ></meta-data>
+
+        <provider
+            android:name="com.facebook.FacebookContentProvider"
+            android:authorities="com.facebook.app.FacebookContentProvider406427876806424"
+            android:exported="true" />
+
+
         <activity
             android:name=".ListWallpaper"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_list_wallpaper"
-            android:theme="@style/FullscreenTheme"></activity>
+            android:theme="@style/FullscreenTheme" />
         <activity android:name=".ViewWallpaper" />
         <activity
             android:name=".HomeActivity"

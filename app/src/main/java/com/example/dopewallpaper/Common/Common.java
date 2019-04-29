@@ -4,6 +4,8 @@ import com.example.dopewallpaper.Model.WallpaperItem;
 
 public class Common {
     public static final String STR_CATEGORY_BACKGROUND = "CategoryBackground";
+    public static final int SIGN_IN_REQUEST_CODE = 1001;
+    public static final int PICK_IMAGE_REQUEST = 1002;
     public static String CATEGORY_SELECTED;
     public static String CATEGORY__ID_SELECTED;
     public static String STR_WALLPAPER = "Wallpapers";

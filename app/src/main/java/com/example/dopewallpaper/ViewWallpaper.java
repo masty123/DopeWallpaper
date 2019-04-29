@@ -8,7 +8,6 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
@@ -19,8 +18,12 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.facebook.FacebookSdk;
+import com.facebook.LoggingBehavior;
+import com.facebook.share.Sharer;
 import com.example.dopewallpaper.Common.Common;
 import com.example.dopewallpaper.Database.DataSource.RecentRepository;
 import com.example.dopewallpaper.Database.LocalDatabase.LocalDatabase;
@@ -28,6 +31,13 @@ import com.example.dopewallpaper.Database.LocalDatabase.RecentsDataSource;
 import com.example.dopewallpaper.Database.Recents;
 import com.example.dopewallpaper.Helper.SaveImageHelper;
 import com.example.dopewallpaper.Model.WallpaperItem;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.share.model.SharePhoto;
+import com.facebook.share.model.SharePhotoContent;
+import com.facebook.share.widget.ShareDialog;
+import com.github.clans.fab.FloatingActionMenu;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -56,13 +66,27 @@ import io.reactivex.schedulers.Schedulers;
 public class ViewWallpaper extends AppCompatActivity {
 
     CollapsingToolbarLayout collapsingToolbarLayout;
+
+
+
+
     FloatingActionButton floatingActionButton, fabDownload;
     ImageView imageView;
-    CoordinatorLayout rootLayout;
+    RelativeLayout rootLayout;
+
+    FloatingActionMenu mainFloating;
+    com.github.clans.fab.FloatingActionButton fbShare;
 
     //Room Database
     CompositeDisposable compositeDisposable;
     RecentRepository recentRepository;
+
+    //Facebook
+    CallbackManager callbackManager;
+    ShareDialog shareDialog;
+
+
+
 
 
 
@@ -80,7 +104,8 @@ public class ViewWallpaper extends AppCompatActivity {
                     dialog.setMessage("Please wait...");
 
                     String fileName = UUID.randomUUID().toString()+".png";
-                    Picasso.with(getBaseContext())
+                    Picasso.with(getApplicationContext())
+//                    Picasso.get()
                             .load(Common.select_background.getImageLink())
                             .into(new SaveImageHelper(getBaseContext(),
                                     dialog, getApplicationContext().getContentResolver(),
@@ -110,6 +135,45 @@ public class ViewWallpaper extends AppCompatActivity {
 
         }
 
+//        @Override
+//        public void onBitmapFailed(Exception e, Drawable errorDrawable) {
+//
+//        }
+
+
+        @Override
+        public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+        }
+    };
+
+    private Target facebookConvert = new Target() {
+        @Override
+        public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+            SharePhoto sharePhoto = new SharePhoto.Builder()
+                    .setBitmap(bitmap)
+                    .build();
+            if(ShareDialog.canShow(SharePhotoContent.class))
+            {
+                SharePhotoContent content = new SharePhotoContent.Builder()
+                        .addPhoto(sharePhoto)
+                        .build();
+                shareDialog.show(content);
+
+            }
+        }
+
+        @Override
+        public void onBitmapFailed(Drawable errorDrawable) {
+
+        }
+
+//        @Override
+//        public void onBitmapFailed(Exception e, Drawable errorDrawable) {
+//
+//        }
+
+
         @Override
         public void onPrepareLoad(Drawable placeHolderDrawable) {
 
@@ -119,12 +183,27 @@ public class ViewWallpaper extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FacebookSdk.setApplicationId(getString(R.string.facebook_app_id));
+        //initialize Facebook SDK
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        if (BuildConfig.DEBUG) {
+            FacebookSdk.setIsDebugEnabled(true);
+            FacebookSdk.addLoggingBehavior(LoggingBehavior.INCLUDE_ACCESS_TOKENS);
+        }
+        //before
         setContentView(R.layout.activity_view_wallpaper);
+
+
 
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if(getSupportActionBar() != null)
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        //Init Facebook
+        callbackManager = CallbackManager.Factory.create() ;
+        shareDialog = new ShareDialog(this);
+
 
         //Init RoomDatabase
         compositeDisposable = new CompositeDisposable();
@@ -133,7 +212,7 @@ public class ViewWallpaper extends AppCompatActivity {
 
 
         //Init
-        rootLayout = (CoordinatorLayout)findViewById(R.id.rootLayout);
+        rootLayout = (RelativeLayout)findViewById(R.id.rootLayout);
         collapsingToolbarLayout = (CollapsingToolbarLayout)findViewById(R.id.collapsing);
         collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.CollapseAppBar);
         collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.ExpandedAppBar);
@@ -141,9 +220,41 @@ public class ViewWallpaper extends AppCompatActivity {
         collapsingToolbarLayout.setTitle(Common.CATEGORY_SELECTED);
 
         imageView = (ImageView)findViewById(R.id.imageThumb);
-        Picasso.with(this)
+//        Picasso.get()
+                Picasso.with(getApplicationContext())
                 .load(Common.select_background.getImageLink())
                 .into(imageView);
+
+        mainFloating = (FloatingActionMenu)findViewById(R.id.menu);
+        fbShare = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.fb_share);
+        fbShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Create callback
+                shareDialog.registerCallback(callbackManager, new FacebookCallback<Sharer.Result>() {
+                    @Override
+                    public void onSuccess(Sharer.Result result) {
+                        Toast.makeText(ViewWallpaper.this, "Share successful !", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onCancel() {
+                        Toast.makeText(ViewWallpaper.this, "Share cancelled :/", Toast.LENGTH_SHORT ).show();
+                    }
+
+                    @Override
+                    public void onError(FacebookException error) {
+                        Toast.makeText(ViewWallpaper.this, "Bruh..., "+error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                //Fetch photo from the link and convert to bitmap.
+//                Picasso.get()
+                Picasso.with(getApplicationContext())
+                        .load(Common.select_background.getImageLink())
+                        .into(facebookConvert);
+            }
+        });
 
         //add to Recents
          addToRecents();
@@ -152,7 +263,8 @@ public class ViewWallpaper extends AppCompatActivity {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Picasso.with(getBaseContext())
+                Picasso.with(getApplicationContext())
+//                Picasso.get()
                         .load(Common.select_background.getImageLink())
                         .into(target);
             }
@@ -174,7 +286,8 @@ public class ViewWallpaper extends AppCompatActivity {
                     dialog.setMessage("Please wait...");
 
                     String fileName = UUID.randomUUID().toString()+".png";
-                    Picasso.with(getBaseContext())
+                    Picasso.with(getApplicationContext())
+//                    Picasso.get()
                             .load(Common.select_background.getImageLink())
                             .into(new SaveImageHelper(getBaseContext(),
                                     dialog, getApplicationContext().getContentResolver(),
@@ -182,7 +295,7 @@ public class ViewWallpaper extends AppCompatActivity {
                 }
             }
         });
-        
+
         //View Count
         increaseViewCount();
 
@@ -294,6 +407,7 @@ public class ViewWallpaper extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
+//        Picasso.get().cancelRequest(target);
         Picasso.with(this).cancelRequest(target);
         compositeDisposable.clear();
         super.onDestroy();

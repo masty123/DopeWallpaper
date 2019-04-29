@@ -14,4 +14,6 @@
     <string name="title_activity_list_wallpaper">ListWallpaper</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="facebook_app_id">406427876806424</string>
+    <string name="facebook_login_protocol_scheme">fb406427876806424</string>
 </resources>

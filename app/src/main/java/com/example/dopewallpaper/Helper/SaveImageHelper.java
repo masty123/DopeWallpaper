@@ -46,6 +46,12 @@ public class SaveImageHelper implements Target {
 
     }
 
+//    @Override
+//    public void onBitmapFailed(Exception e, Drawable errorDrawable) {
+//
+//    }
+
+
     @Override
     public void onPrepareLoad(Drawable placeHolderDrawable) {
 

@@ -51,7 +51,8 @@ public class CategoryFragment extends Fragment {
         adapter = new FirebaseRecyclerAdapter<CategoryItem, CategoryViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull final CategoryViewHolder holder, int position, @NonNull final CategoryItem model) {
-                Picasso.with(getActivity())
+//                Picasso.get()
+                  Picasso.with(getContext())
                         .load(model.getImagelink())
                         .networkPolicy(NetworkPolicy.OFFLINE)
                         .into(holder.background_image, new Callback() {
@@ -62,7 +63,9 @@ public class CategoryFragment extends Fragment {
 
                             @Override
                             public void onError() {
-                                Picasso.with(getActivity())
+//                          public void onError(Exception ex) {
+                                Picasso.with(getContext())
+//                                Picasso.get()
                                         .load(model.getImagelink())
                                         .error(R.drawable.ic_terrain_black_24dp)
                                         .into(holder.background_image, new Callback() {
@@ -73,6 +76,8 @@ public class CategoryFragment extends Fragment {
 
                                             @Override
                                             public void onError() {
+
+//                                            public void onError(Exception ex) {
                                                 Log.e("Error_DW", "Couldn't fetch image");
                                             }
                                         });

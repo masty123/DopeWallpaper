@@ -21,6 +21,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(homeIntent);
                 finish();
             }
-        }, 5000); //Sleep 5 secs
+        }, 3000); //Sleep 3 secs
     }
 }

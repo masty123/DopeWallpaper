@@ -46,6 +46,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<ListWallpaperViewHol
 
     @Override
     public void onBindViewHolder(final ListWallpaperViewHolder holder, final int i) {
+        //Picasso.get()
         Picasso.with(context)
                 .load(recents.get(i).getImageUrl())
                 .networkPolicy(NetworkPolicy.OFFLINE)
@@ -58,6 +59,8 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<ListWallpaperViewHol
 
                     @Override
                     public void onError() {
+//                  public void onError(Exception e) {
+                        //Picasso.get()
                         Picasso.with(context)
                                 .load(recents.get(i).getImageUrl())
                                 .error(R.drawable.ic_terrain_black_24dp)
@@ -69,6 +72,8 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<ListWallpaperViewHol
 
                                     @Override
                                     public void onError() {
+
+                                            //public void onError(Exception ex) {
                                         Log.e("ERROR_DW", "Could not fetch the image.");
                                     }
                                 });
