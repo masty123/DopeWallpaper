@@ -188,9 +188,9 @@ public class HomeActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_view_upload) {
-            // Handle the camera action
-        }
+//        if (id == R.id.nav_view_upload) {
+//            // Handle the camera action
+//        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

@@ -16,10 +16,9 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:theme="@style/ToolBarColoredBackArrow"
+            android:background="@color/fui_bgGitHub"
             app:popupTheme="@style/AppTheme.PopupOverlay"
-            ></android.support.v7.widget.Toolbar>
+            app:theme="@style/ToolBarColoredBackArrow"></android.support.v7.widget.Toolbar>
 
 
     </android.support.design.widget.AppBarLayout>
@@ -29,7 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/app_bar"
-        android:background="@drawable/com_facebook_auth_dialog_header_background"
+        android:background="@color/colorAccent"
         android:clipToPadding="false"
         android:padding="0dp"></android.support.v7.widget.RecyclerView>
 

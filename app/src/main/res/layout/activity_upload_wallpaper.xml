@@ -4,33 +4,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white" 
+    android:background="#201E1E"
     tools:context="com.example.dopewallpaper.UploadWallpaper">
 
     <LinearLayout
-        android:weightSum="2"
-        android:orientation="vertical"
-        android:layout_margin="16dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_margin="16dp"
+        android:orientation="vertical"
+        android:weightSum="2">
 
         <ImageView
             android:id="@+id/image_preview"
-            android:src="@drawable/ic_menu_gallery"
-            android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="0dp" />
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_menu_gallery" />
 
         <com.jaredrummler.materialspinner.MaterialSpinner
             android:id="@+id/spinner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            app:ms_background_color="@color/browser_actions_title_color" />
 
         <EditText
             android:id="@+id/description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter Your Description" />
+            android:hint="Enter Your Description"
+            android:textColor="@color/browser_actions_bg_grey"
+            android:textColorHighlight="@color/browser_actions_bg_grey"
+            android:textColorHint="@color/browser_actions_bg_grey"
+            android:textColorLink="@color/browser_actions_bg_grey" />
 
 
         <LinearLayout
@@ -57,14 +63,9 @@
                 android:text="Upload" />
 
 
-
-
-
-
         </LinearLayout>
 
     </LinearLayout>
-
 
 
 </RelativeLayout>

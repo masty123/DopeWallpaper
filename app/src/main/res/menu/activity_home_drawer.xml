@@ -6,13 +6,13 @@
 
 
     <item android:title="Management">
-        <menu>
-            <item
-                android:id="@+id/nav_view_upload"
-                android:icon="@drawable/ic_menu_gallery"
-                android:title="View your uploads" />
+        <!--<menu>-->
+            <!--<item-->
+                <!--android:id="@+id/nav_view_upload"-->
+                <!--android:icon="@drawable/ic_menu_gallery"-->
+                <!--android:title="View your uploads" />-->
 
-        </menu>
+        <!--</menu>-->
     </item>
 
 </menu>

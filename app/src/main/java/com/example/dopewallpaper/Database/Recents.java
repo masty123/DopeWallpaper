@@ -5,7 +5,7 @@ import android.arch.persistence.room.Entity;
 import android.support.annotation.NonNull;
 
 
-@Entity(tableName = "recents", primaryKeys = {"imageUrl", "category"})
+@Entity(tableName = "recents", primaryKeys = {"imageUrl", "category", "title"})
 public class Recents {
     @ColumnInfo(name = "imageUrl")
     @NonNull
@@ -22,13 +22,26 @@ public class Recents {
     @ColumnInfo(name = "key")
     private String key;
 
-    public Recents(){}
 
-    public Recents(@NonNull String imageUrl, @NonNull String category, String saveTime, String key) {
+
+    @ColumnInfo(name = "title")
+    @NonNull
+    private String title;
+
+
+//    public Recents(@NonNull String imageUrl, @NonNull String category, String saveTime, String key) {
+//        this.imageUrl = imageUrl;
+//        this.category = category;
+//        this.saveTime = saveTime;
+//        this.key = key;
+//    }
+
+    public Recents(@NonNull String imageUrl, @NonNull String category, String saveTime, String key, String title) {
         this.imageUrl = imageUrl;
         this.category = category;
         this.saveTime = saveTime;
         this.key = key;
+        this.title = title;
     }
 
     public String getImageUrl() {
@@ -60,4 +73,14 @@ public class Recents {
     public void setKey(String key) {
         this.key = key;
     }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+
 }
