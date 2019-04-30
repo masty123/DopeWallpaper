@@ -4,9 +4,7 @@ public class CategoryItem {
     private String name;
     private String ImageLink;
 
-    public CategoryItem(){
-
-    }
+    public CategoryItem(){ }
 
     public CategoryItem(String name, String imagelink){
         this.name = name;

@@ -61,7 +61,7 @@ public class TrendingFragment extends Fragment {
             protected void onBindViewHolder(@NonNull final ListWallpaperViewHolder holder, int position, @NonNull final WallpaperItem model) {
 //                Picasso.get()
                   Picasso.with(getContext())
-                        .load(model.getImageLink())
+                        .load(model.getImageUrl())
                         .networkPolicy(NetworkPolicy.OFFLINE)
                         .into(holder.wallpaper, new Callback() {
 
@@ -77,7 +77,7 @@ public class TrendingFragment extends Fragment {
 //                                Picasso.get()
                                   Picasso.with(getContext())
 
-                                        .load(model.getImageLink())
+                                        .load(model.getImageUrl())
                                         .error(R.drawable.ic_terrain_black_24dp)
                                         .into(holder.wallpaper, new Callback() {
                                             @Override

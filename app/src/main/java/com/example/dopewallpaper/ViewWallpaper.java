@@ -9,7 +9,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.graphics.drawable.Drawable;
 import android.os.StrictMode;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -55,7 +54,6 @@ import com.squareup.picasso.Target;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -117,7 +115,7 @@ public class ViewWallpaper extends AppCompatActivity {
                     String fileName = UUID.randomUUID().toString()+".png";
                     Picasso.with(getApplicationContext())
 //                    Picasso.get()
-                            .load(Common.select_background.getImageLink())
+                            .load(Common.select_background.getImageUrl())
                             .into(new SaveImageHelper(getBaseContext(),
                                     dialog, getApplicationContext().getContentResolver(),
                                     fileName, "DopeWallpaper Image"));
@@ -222,14 +220,14 @@ public class ViewWallpaper extends AppCompatActivity {
         imageView = (ImageView)findViewById(R.id.imageThumb);
 //        Picasso.get()
                 Picasso.with(getApplicationContext())
-                .load(Common.select_background.getImageLink())
+                .load(Common.select_background.getImageUrl())
                 .into(imageView);
 
         title = (TextView)findViewById(R.id.title);
         title.setText(Common.select_background.getTitle());
 
         resolution = (TextView)findViewById(R.id.resolution);
-        Bitmap res = getBitmapFromURL(Common.select_background.getImageLink());
+        Bitmap res = getBitmapFromURL(Common.select_background.getImageUrl());
         int width = res.getWidth();
         int height = res.getHeight();
         resolution.setText("Resolution: "+width+"x"+height);
@@ -261,7 +259,7 @@ public class ViewWallpaper extends AppCompatActivity {
 
                 //Fetch photo from the link and convert to bitmap.
                 Picasso.with(getApplicationContext())
-                        .load(Common.select_background.getImageLink())
+                        .load(Common.select_background.getImageUrl())
                         .into(facebookConvert);
             }
         });
@@ -274,7 +272,7 @@ public class ViewWallpaper extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Picasso.with(getApplicationContext())
-                        .load(Common.select_background.getImageLink())
+                        .load(Common.select_background.getImageUrl())
                         .into(target);
             }
         });
@@ -297,7 +295,7 @@ public class ViewWallpaper extends AppCompatActivity {
                     String fileName = UUID.randomUUID().toString()+".png";
                     Picasso.with(getApplicationContext())
 //                    Picasso.get()
-                            .load(Common.select_background.getImageLink())
+                            .load(Common.select_background.getImageUrl())
                             .into(new SaveImageHelper(getBaseContext(),
                                     dialog, getApplicationContext().getContentResolver(),
                                     fileName, "DopeWallpaper Image"));
@@ -412,8 +410,8 @@ public class ViewWallpaper extends AppCompatActivity {
             @Override
             public void subscribe(ObservableEmitter<Object> e) throws Exception {
                 Recents recents = new Recents(
-                        Common.select_background.getImageLink(),
-                        Common.select_background.getCategoryId(),
+                        Common.select_background.getImageUrl(),
+                        Common.select_background.getCategory(),
                         Common.select_background.getTitle(),
                         String.valueOf(System.currentTimeMillis()),
                         Common.select_background_key);

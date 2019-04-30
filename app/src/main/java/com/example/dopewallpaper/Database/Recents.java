@@ -29,12 +29,6 @@ public class Recents {
     private String title;
 
 
-//    public Recents(@NonNull String imageUrl, @NonNull String category, String saveTime, String key) {
-//        this.imageUrl = imageUrl;
-//        this.category = category;
-//        this.saveTime = saveTime;
-//        this.key = key;
-//    }
 
     public Recents(@NonNull String imageUrl, @NonNull String category, String saveTime, String key, String title) {
         this.imageUrl = imageUrl;

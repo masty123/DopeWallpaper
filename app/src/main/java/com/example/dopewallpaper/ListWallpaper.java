@@ -13,7 +13,6 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.dopewallpaper.Common.Common;
 import com.example.dopewallpaper.Interface.ItemClickListener;
@@ -24,7 +23,6 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.squareup.picasso.Callback;
-import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -70,7 +68,7 @@ public class ListWallpaper extends AppCompatActivity {
             protected void onBindViewHolder(@NonNull final ListWallpaperViewHolder holder, int position, @NonNull final WallpaperItem model) {
                 //Picasso.get()
                 Picasso.with(getApplicationContext())
-                        .load(model.getImageLink())
+                        .load(model.getImageUrl())
                         .into(holder.wallpaper, new Callback() {
 
                             @Override
@@ -85,7 +83,7 @@ public class ListWallpaper extends AppCompatActivity {
                                 Picasso.with(getApplicationContext())
 
 //                                Picasso.get()
-                                        .load(model.getImageLink())
+                                        .load(model.getImageUrl())
                                         .error(R.drawable.ic_terrain_black_24dp)
                                         .into(holder.wallpaper, new Callback() {
                                             @Override

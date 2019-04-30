@@ -14,19 +14,19 @@ public class WallpaperItem {
         this.title = title;
     }
 
-    public String getImageLink() {
+    public String getImageUrl() {
         return imageUrl;
     }
 
-    public String getCategoryId() {
+    public String getCategory() {
         return category;
     }
 
-    public void setImageLink(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImageLink(String imageLink) {
+        this.imageUrl = imageLink;
     }
 
-    public void setCategoryId(String category) {
+    public void setCategoryId(String categoryId) {
         this.category = category;
     }
 
