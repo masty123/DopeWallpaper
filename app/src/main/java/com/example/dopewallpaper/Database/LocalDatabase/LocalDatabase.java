@@ -14,7 +14,7 @@ import static com.example.dopewallpaper.Database.LocalDatabase.LocalDatabase.DAT
 public abstract class LocalDatabase extends RoomDatabase {
 
 
-    public static final int DATABASE_VERSION = 3;
+    public static final int DATABASE_VERSION = 4;
     public static final String DATABASE_NAME = "DopeWallpaper";
 
     public abstract RecentsDAO recentsDAO();

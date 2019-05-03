@@ -48,6 +48,7 @@ public class UploadWallpaper extends AppCompatActivity {
     MaterialSpinner spinner;
     private Uri filePath;
     EditText title;
+    EditText author;
 
     String categoryIdSelect = "";
 
@@ -75,6 +76,7 @@ public class UploadWallpaper extends AppCompatActivity {
         btn_browse = (Button)findViewById(R.id.btn_browser);
         spinner = (MaterialSpinner)findViewById(R.id.spinner);
         title = (EditText)findViewById(R.id.description);
+        author = (EditText)findViewById(R.id.author);
 
         //Load Spinner data
         loadCategoryToSpinner();
@@ -93,6 +95,8 @@ public class UploadWallpaper extends AppCompatActivity {
                     Toast.makeText(UploadWallpaper.this, "Choose your category first", Toast.LENGTH_SHORT).show();
                 else if (title.getText().toString().equals("") || title.getText().toString().equals(null) )
                     Toast.makeText(UploadWallpaper.this, "Name your wallpaper first", Toast.LENGTH_SHORT).show();
+                else if (author.getText().toString().equals("") || title.getText().toString().equals(null) )
+                    Toast.makeText(UploadWallpaper.this, "Insert your author name first", Toast.LENGTH_SHORT).show();
 
                 else
                     upload();
@@ -135,7 +139,7 @@ public class UploadWallpaper extends AppCompatActivity {
                                 public void onSuccess(Uri uri) {
                                     Uri dlUri = uri;
                                     Log.d("Download URI", dlUri.toString());
-                                    saveUrlToCategory(categoryIdSelect, dlUri.toString(), title.getText().toString());
+                                    saveUrlToCategory(categoryIdSelect, dlUri.toString(), title.getText().toString(), author.getText().toString());
                                     progressDialog.dismiss();
                                 }
                             });
@@ -158,10 +162,10 @@ public class UploadWallpaper extends AppCompatActivity {
         }
     }
 
-    private void saveUrlToCategory(String categoryIdSelect, String imageLink, String title) {
+    private void saveUrlToCategory(String categoryIdSelect, String imageLink, String title, String author) {
         FirebaseDatabase.getInstance().getReference(Common.STR_WALLPAPER)
                 .push() // generate key
-                .setValue(new WallpaperItem(imageLink, categoryIdSelect, title ))
+                .setValue(new WallpaperItem(imageLink, categoryIdSelect, title, author ))
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
@@ -171,9 +175,6 @@ public class UploadWallpaper extends AppCompatActivity {
                 });
     }
 
-    private void chooseImage(){
-
-    }
 
     public void onActivityResult(int requestCode,int resultCode,Intent data){
         // Result code is RESULT_OK only if the user selects an Image

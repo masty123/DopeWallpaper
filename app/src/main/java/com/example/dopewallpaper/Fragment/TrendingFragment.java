@@ -50,7 +50,7 @@ public class TrendingFragment extends Fragment {
         categoryBackground = database.getReference(Common.STR_WALLPAPER);
         //get 10 item that have biggest view count.
         //orderBychild will sort the item by "viewCount".
-        Query query = categoryBackground.orderByChild("viewCount").limitToLast(10);
+        Query query = categoryBackground.orderByChild("viewCount").limitToLast(5);
 
         options = new FirebaseRecyclerOptions.Builder<WallpaperItem>()
                 .setQuery(query, WallpaperItem.class)
@@ -62,7 +62,8 @@ public class TrendingFragment extends Fragment {
 //                Picasso.get()
                   Picasso.with(getContext())
                         .load(model.getImageUrl())
-                        .networkPolicy(NetworkPolicy.OFFLINE)
+                          .resize(1280, 720)
+                          .networkPolicy(NetworkPolicy.OFFLINE)
                         .into(holder.wallpaper, new Callback() {
 
                             @Override

@@ -20,6 +20,8 @@
         android:layout_gravity="start"
         android:background="@color/fui_bgGitHub"
         android:fitsSystemWindows="true"
+        app:itemTextColor="#FFFFFFFF"
+        android:theme="@style/NavigationView"
         app:headerLayout="@layout/nav_header_home"
         app:menu="@menu/activity_home_drawer" />
 

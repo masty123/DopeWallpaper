@@ -89,6 +89,16 @@
                         android:textColor="@color/colorPrimary"
                         android:textSize="20sp" />
 
+                    <TextView
+                        android:id="@+id/author"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:padding="12dp"
+                        android:text="Author"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="20sp" />
+
 
                 </LinearLayout>
 
@@ -103,7 +113,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="30dp"
             android:src="@drawable/ic_terrain_black_24dp"
-            app:backgroundTint="@android:color/black"
+            app:backgroundTint="#FFFFFFFF"
             app:elevation="6dp"
             app:layout_anchor="@id/app_bar_Layout"
             app:layout_anchorGravity="bottom|right|end"
@@ -171,7 +181,7 @@
             android:id="@+id/fb_share"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_share_white_24dp"
+            android:src="@drawable/com_facebook_button_icon"
             fab:fab_label="Share to Facebook"
             fab:fab_size="mini" />
 

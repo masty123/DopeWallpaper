@@ -69,6 +69,7 @@ public class ListWallpaper extends AppCompatActivity {
                 //Picasso.get()
                 Picasso.with(getApplicationContext())
                         .load(model.getImageUrl())
+                        .resize(1920, 1080)
                         .into(holder.wallpaper, new Callback() {
 
                             @Override

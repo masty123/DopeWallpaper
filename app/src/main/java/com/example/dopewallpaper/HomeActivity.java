@@ -3,7 +3,10 @@ package com.example.dopewallpaper;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
@@ -20,6 +23,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +31,10 @@ import com.example.dopewallpaper.Adapter.MyFragmentAdapter;
 import com.example.dopewallpaper.Common.Common;
 import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.auth.FirebaseAuth;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -37,8 +45,15 @@ public class HomeActivity extends AppCompatActivity
     DrawerLayout drawer;
 
     NavigationView navigationView;
+    MenuItem menuItem;
 
     BottomNavigationView menu_bottom;
+    URL url;
+    Bitmap image;
+
+    private FirebaseAuth mAuth;
+
+
 
 
     @Override
@@ -65,9 +80,12 @@ public class HomeActivity extends AppCompatActivity
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if(requestCode == Common.SIGN_IN_REQUEST_CODE){
             if(resultCode == RESULT_OK){
+
                 Snackbar.make(drawer, new StringBuilder("Welcome ")
                         .append(FirebaseAuth.getInstance().getCurrentUser().getEmail()
                                 .toString()), Snackbar.LENGTH_LONG).show();
+
+
 
 
                 //Request Runtime permission
@@ -88,13 +106,20 @@ public class HomeActivity extends AppCompatActivity
         }
     }
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("DopeWallpaper");
+        mAuth = FirebaseAuth.getInstance();
         setSupportActionBar(toolbar);
+
+
+
+
 
         menu_bottom = (BottomNavigationView)findViewById(R.id.navigation);
         menu_bottom.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -112,15 +137,19 @@ public class HomeActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+
+
         //Check if not sign-in then navigate Sign-in page
-        if(FirebaseAuth.getInstance().getCurrentUser() == null){
-            startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder().build(),
-                    Common.SIGN_IN_REQUEST_CODE);
-        }
-        else{
-            Snackbar.make(drawer, new StringBuilder("Welcome ").append(FirebaseAuth.getInstance().getCurrentUser().getEmail().toString()
-            ), Snackbar.LENGTH_LONG).show();
-        }
+//        if(FirebaseAuth.getInstance().getCurrentUser() == null){
+//
+//            startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder().build(),
+//                    Common.SIGN_IN_REQUEST_CODE);
+//
+//        }
+//        else{
+//            Snackbar.make(drawer, new StringBuilder("Welcome ").append(FirebaseAuth.getInstance().getCurrentUser().getEmail().toString()
+//            ), Snackbar.LENGTH_LONG).show();
+//        }
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -143,10 +172,32 @@ public class HomeActivity extends AppCompatActivity
     }
 
     private void loadUserInformation() {
-        if(FirebaseAuth.getInstance().getCurrentUser() != null){
+        if(mAuth.getInstance().getCurrentUser() != null){
             View headerLayout = navigationView.getHeaderView(0);
+//            ImageView userProf = (ImageView)headerLayout.findViewById(R.id.userImage);
+//            image = getBitmapFromURL(FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl().toString());
+//            userProf.setImageBitmap(image);
+            TextView txt_usr = (TextView)headerLayout.findViewById(R.id.username);
             TextView txt_email = (TextView)headerLayout.findViewById(R.id.txt_email);
-            txt_email.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+            txt_email.setText(mAuth.getInstance().getCurrentUser().getEmail());
+        }
+    }
+
+
+    public static Bitmap getBitmapFromURL(String src) {
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+        try {
+            URL url = new URL(src);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            Bitmap myBitmap = BitmapFactory.decodeStream(input);
+            return myBitmap;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 
@@ -167,30 +218,24 @@ public class HomeActivity extends AppCompatActivity
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-//        if (id == R.id.nav_view_upload) {
-//            // Handle the camera action
-//        }
+        if (id == R.id.signout) {
+
+            if(FirebaseAuth.getInstance().getCurrentUser() != null){
+                mAuth.signOut();
+                Intent i = new Intent(HomeActivity.this, SignIn.class);
+                startActivity(i);
+                finish();
+
+            }
+
+
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

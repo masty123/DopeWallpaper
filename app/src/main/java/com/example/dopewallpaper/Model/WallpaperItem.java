@@ -4,14 +4,20 @@ public class WallpaperItem {
     public String imageUrl;
     public String category;
     public String title;
+
+
+
+    public String author;
     public long viewCount;
+
 
     public WallpaperItem(){ }
 
-    public WallpaperItem(String imageUrl, String category, String title){
+    public WallpaperItem(String imageUrl, String category, String title, String author){
         this.imageUrl = imageUrl;
         this.category = category;
         this.title = title;
+        this.author = author;
     }
 
     public String getImageUrl() {
@@ -41,4 +47,10 @@ public class WallpaperItem {
     public void setTitle(String title) {
         this.title = title;
     }
+
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+    public String getAuthor() { return author; }
 }

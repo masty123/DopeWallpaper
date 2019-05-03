@@ -82,6 +82,7 @@ public class ViewWallpaper extends AppCompatActivity {
     RelativeLayout rootLayout;
     TextView title;
     TextView resolution;
+    TextView author;
 
     FloatingActionMenu mainFloating;
     com.github.clans.fab.FloatingActionButton fbShare;
@@ -221,10 +222,13 @@ public class ViewWallpaper extends AppCompatActivity {
 //        Picasso.get()
                 Picasso.with(getApplicationContext())
                 .load(Common.select_background.getImageUrl())
+                .resize(1280, 720)
                 .into(imageView);
 
         title = (TextView)findViewById(R.id.title);
-        title.setText(Common.select_background.getTitle());
+        title.setText("Title: "+Common.select_background.getTitle());
+        author = (TextView)findViewById(R.id.author);
+        author.setText("Author: "+Common.select_background.getAuthor());
 
         resolution = (TextView)findViewById(R.id.resolution);
         Bitmap res = getBitmapFromURL(Common.select_background.getImageUrl());
@@ -273,6 +277,7 @@ public class ViewWallpaper extends AppCompatActivity {
             public void onClick(View v) {
                 Picasso.with(getApplicationContext())
                         .load(Common.select_background.getImageUrl())
+                        .resize(1920, 1080)
                         .into(target);
             }
         });
@@ -325,22 +330,6 @@ public class ViewWallpaper extends AppCompatActivity {
         }
     }
 
-    public Bitmap getResizedBitmap(Bitmap bm, int newHeight, int newWidth) {
-        int width = bm.getWidth();
-        int height = bm.getHeight();
-        float scaleWidth = ((float) newWidth) / width;
-        float scaleHeight = ((float) newHeight) / height;
-        // CREATE A MATRIX FOR THE MANIPULATION
-        Matrix matrix = new Matrix();
-        // RESIZE THE BIT MAP
-        matrix.postScale(scaleWidth, scaleHeight);
-
-        // "RECREATE" THE NEW BITMAP
-        Bitmap resizedBitmap = Bitmap.createBitmap(bm, 0, 0, width, height,
-                matrix, false);
-
-        return resizedBitmap;
-    }
 
 
     private void increaseViewCount() {
@@ -413,6 +402,7 @@ public class ViewWallpaper extends AppCompatActivity {
                         Common.select_background.getImageUrl(),
                         Common.select_background.getCategory(),
                         Common.select_background.getTitle(),
+                        Common.select_background.getAuthor(),
                         String.valueOf(System.currentTimeMillis()),
                         Common.select_background_key);
                 recentRepository.insertRecents(recents);
