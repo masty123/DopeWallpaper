@@ -1,12 +1,14 @@
 package com.example.dopewallpaper.Model;
 
+import com.google.firebase.database.Exclude;
+
 public class WallpaperItem {
+    @Exclude
+    public String id;
+
     public String imageUrl;
     public String category;
     public String title;
-
-
-
     public String author;
     public long viewCount;
 
@@ -19,6 +21,15 @@ public class WallpaperItem {
         this.title = title;
         this.author = author;
     }
+
+
+//    public WallpaperItem(String id, String imageUrl, String category, String title, String author) {
+//        this.id = id;
+//        this.imageUrl = imageUrl;
+//        this.category = category;
+//        this.title = title;
+//        this.author = author;
+//    }
 
     public String getImageUrl() {
         return imageUrl;

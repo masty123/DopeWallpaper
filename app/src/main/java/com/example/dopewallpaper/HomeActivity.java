@@ -20,6 +20,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,7 +30,6 @@ import android.widget.Toast;
 
 import com.example.dopewallpaper.Adapter.MyFragmentAdapter;
 import com.example.dopewallpaper.Common.Common;
-import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.auth.FirebaseAuth;
 import java.io.IOException;
 import java.io.InputStream;
@@ -50,6 +50,8 @@ public class HomeActivity extends AppCompatActivity
     BottomNavigationView menu_bottom;
     URL url;
     Bitmap image;
+    ImageView user;
+
 
     private FirebaseAuth mAuth;
 
@@ -118,9 +120,6 @@ public class HomeActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
 
-
-
-
         menu_bottom = (BottomNavigationView)findViewById(R.id.navigation);
         menu_bottom.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -131,25 +130,13 @@ public class HomeActivity extends AppCompatActivity
                 return false;
             }
         });
+
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-
-
-        //Check if not sign-in then navigate Sign-in page
-//        if(FirebaseAuth.getInstance().getCurrentUser() == null){
-//
-//            startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder().build(),
-//                    Common.SIGN_IN_REQUEST_CODE);
-//
-//        }
-//        else{
-//            Snackbar.make(drawer, new StringBuilder("Welcome ").append(FirebaseAuth.getInstance().getCurrentUser().getEmail().toString()
-//            ), Snackbar.LENGTH_LONG).show();
-//        }
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -174,10 +161,13 @@ public class HomeActivity extends AppCompatActivity
     private void loadUserInformation() {
         if(mAuth.getInstance().getCurrentUser() != null){
             View headerLayout = navigationView.getHeaderView(0);
-//            ImageView userProf = (ImageView)headerLayout.findViewById(R.id.userImage);
-//            image = getBitmapFromURL(FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl().toString());
-//            userProf.setImageBitmap(image);
+            user = (ImageView)headerLayout.findViewById(R.id.userImage);
+            if(FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl() != null){
+                image = getBitmapFromURL(FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl().toString());
+                user.setImageBitmap(image);
+            }
             TextView txt_usr = (TextView)headerLayout.findViewById(R.id.username);
+            txt_usr.setText(mAuth.getInstance().getCurrentUser().getDisplayName());
             TextView txt_email = (TextView)headerLayout.findViewById(R.id.txt_email);
             txt_email.setText(mAuth.getInstance().getCurrentUser().getEmail());
         }

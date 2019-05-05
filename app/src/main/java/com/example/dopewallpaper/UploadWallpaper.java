@@ -212,6 +212,9 @@ public class UploadWallpaper extends AppCompatActivity {
                             CategoryItem item = postSnapshot.getValue(CategoryItem.class);
                             String key = postSnapshot.getKey();
                             spinnerData.put(key, item.getName());
+
+
+
                         }
                         //Because Material Spinner will not receive hint so, we need custom hint.
                         Object[] valueArray = spinnerData.values().toArray();

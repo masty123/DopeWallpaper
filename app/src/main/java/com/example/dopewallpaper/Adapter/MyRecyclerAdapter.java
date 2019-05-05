@@ -45,10 +45,10 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<ListWallpaperViewHol
     }
 
     @Override
-    public void onBindViewHolder(final ListWallpaperViewHolder holder, final int i) {
+    public void onBindViewHolder(final ListWallpaperViewHolder holder, final int position) {
         //Picasso.get()
         Picasso.with(context)
-                .load(recents.get(i).getImageUrl())
+                .load(recents.get(position).getImageUrl())
                 .networkPolicy(NetworkPolicy.OFFLINE)
                 .into( holder.wallpaper, new Callback() {
 
@@ -62,7 +62,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<ListWallpaperViewHol
 //                  public void onError(Exception e) {
                         //Picasso.get()
                         Picasso.with(context)
-                                .load(recents.get(i).getImageUrl())
+                                .load(recents.get(position).getImageUrl())
                                 .error(R.drawable.ic_terrain_black_24dp)
                                 .into(holder.wallpaper, new Callback() {
                                     @Override
@@ -86,10 +86,12 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<ListWallpaperViewHol
             public void onClick(View view, int position) {
                 Intent intent = new Intent(context, ViewWallpaper.class);
                 WallpaperItem wallpaperItem = new WallpaperItem();
-                wallpaperItem.setCategoryId(recents.get(i).getCategory());
-                wallpaperItem.setImageLink(recents.get(i).getImageUrl());
+                wallpaperItem.setCategoryId(recents.get(position).getCategory());
+                wallpaperItem.setImageLink(recents.get(position).getImageUrl());
+                wallpaperItem.setTitle(recents.get(position).getTitle());
+                wallpaperItem.setAuthor(recents.get(position).getAuthor());
                 Common.select_background = wallpaperItem;
-                Common.select_background_key = recents.get(i).getKey();
+                Common.select_background_key = recents.get(position).getKey();
                 context.startActivity(intent);
             }
         });

@@ -62,7 +62,7 @@ public class TrendingFragment extends Fragment {
 //                Picasso.get()
                   Picasso.with(getContext())
                         .load(model.getImageUrl())
-                          .resize(1280, 720)
+//                          .resize(1080, 1920)
                           .networkPolicy(NetworkPolicy.OFFLINE)
                         .into(holder.wallpaper, new Callback() {
 

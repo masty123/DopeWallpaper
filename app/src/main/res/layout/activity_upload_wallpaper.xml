@@ -57,12 +57,12 @@
 
             <Button
                 android:id="@+id/btn_browser"
-                style="@style/Widget.AppCompat.Button.Colored"
+                style="@android:style/Theme.Black"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Browse"
-                android:textColor="#FFFFFFFF"/>
+                android:textColor="@color/common_google_signin_btn_text_dark_focused" />
 
             <Button
                 android:id="@+id/btn_upload"

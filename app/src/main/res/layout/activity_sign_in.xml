@@ -91,6 +91,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password" />
 
+    <Button
+        android:id="@+id/gAccount"
+        android:layout_width="226dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="96dp"
+        android:background="#50000000"
+        android:text="Sign up with Google Account"
+        android:textColor="#fff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signin" />
+
     <ImageView
         android:id="@+id/icon"
         android:layout_width="144dp"

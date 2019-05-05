@@ -6,7 +6,6 @@ import android.app.WallpaperManager;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
 import android.graphics.drawable.Drawable;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
@@ -204,10 +203,7 @@ public class ViewWallpaper extends AppCompatActivity {
         shareDialog = new ShareDialog(this);
 
 
-        //Init RoomDatabase
-        compositeDisposable = new CompositeDisposable();
-        LocalDatabase database = LocalDatabase.getInstance(this);
-        recentRepository = RecentRepository.getInstance(RecentsDataSource.getInstance(database.recentsDAO()));
+
 
 
         //Init
@@ -222,8 +218,15 @@ public class ViewWallpaper extends AppCompatActivity {
 //        Picasso.get()
                 Picasso.with(getApplicationContext())
                 .load(Common.select_background.getImageUrl())
-                .resize(1280, 720)
+                .resize(1920, 1080)
                 .into(imageView);
+
+
+
+        //Init RoomDatabase
+        compositeDisposable = new CompositeDisposable();
+        LocalDatabase database = LocalDatabase.getInstance(this);
+        recentRepository = RecentRepository.getInstance(RecentsDataSource.getInstance(database.recentsDAO()));
 
         title = (TextView)findViewById(R.id.title);
         title.setText("Title: "+Common.select_background.getTitle());
@@ -277,7 +280,8 @@ public class ViewWallpaper extends AppCompatActivity {
             public void onClick(View v) {
                 Picasso.with(getApplicationContext())
                         .load(Common.select_background.getImageUrl())
-                        .resize(1920, 1080)
+
+
                         .into(target);
             }
         });
@@ -338,13 +342,13 @@ public class ViewWallpaper extends AppCompatActivity {
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if (dataSnapshot.hasChild("ViewCount")){
+                        if (dataSnapshot.hasChild("viewCount")){
                             WallpaperItem wallpaperItem = dataSnapshot.getValue(WallpaperItem.class);
                             long count = wallpaperItem.getViewCount();
 
                             //Update
                             Map<String, Object> update_view = new HashMap<>();
-                            update_view.put("viewCount", count);
+                            update_view.put("viewCount", count+1);
                             FirebaseDatabase.getInstance()
                                     .getReference(Common.STR_WALLPAPER)
                                     .child(Common.select_background_key)
@@ -405,6 +409,11 @@ public class ViewWallpaper extends AppCompatActivity {
                         Common.select_background.getAuthor(),
                         String.valueOf(System.currentTimeMillis()),
                         Common.select_background_key);
+
+                Log.d("url: ", Common.select_background.getCategory());
+                Log.d("title: ", Common.select_background.getTitle());
+                Log.d("author: ", Common.select_background.getAuthor());
+
                 recentRepository.insertRecents(recents);
                 e.onComplete();
             }

@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.dopewallpaper.Common.Common;
+import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -21,7 +23,7 @@ public class SignIn extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private EditText email, password;
-    private Button signin, signup;
+    private Button signin, signup, gAccount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,8 @@ public class SignIn extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         signin = (Button) findViewById(R.id.signin);
         signup = (Button) findViewById(R.id.signup);
+        gAccount = (Button) findViewById(R.id.gAccount);
+
         email = (EditText) findViewById(R.id.email);
         password = (EditText) findViewById(R.id.password);
 
@@ -59,6 +63,18 @@ public class SignIn extends AppCompatActivity {
 
             }
         });
+
+        gAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder()
+                        .build(), Common.SIGN_IN_REQUEST_CODE);
+
+            }
+        });
+
+
+
     }
 
     private void callSignup(String email, String password){

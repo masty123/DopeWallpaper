@@ -32,15 +32,12 @@ public class RecentsDataSource implements IRecentsDataSource {
     }
 
     @Override
-    public void updateRecents(Recents... recents) {
+    public void updateRecents( Recents... recents) {
             recentsDAO.updateRecents(recents);
     }
 
     @Override
-    public void deleteRecents(Recents... recents) {
-            recentsDAO.deleteRecents(recents);
-
-    }
+    public void deleteRecents(Recents... recents) { recentsDAO.deleteRecents(recents); }
 
     @Override
     public void deleteAllRecents() {

@@ -30,16 +30,16 @@ public class MyFragmentAdapter extends FragmentPagerAdapter {
 
         }
 
-        else if (position == 2){
-            return RecentFragment.getInstance(context);
-
-        }
+//        else if (position == 2){
+//            return RecentFragment.getInstance(context);
+//
+//        }
         return null;
     }
 
     @Override
     public int getCount() {
-        return 3;
+        return 2;
     }
 
     @Nullable
@@ -50,8 +50,8 @@ public class MyFragmentAdapter extends FragmentPagerAdapter {
                 return "Category";
             case 1:
                 return "Trending";
-            case 2:
-                return "Recents";
+//            case 2:
+//                return "Recents";
         }
         return "";
     }
