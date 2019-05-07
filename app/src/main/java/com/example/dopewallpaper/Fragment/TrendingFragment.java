@@ -96,6 +96,8 @@ public class TrendingFragment extends Fragment {
                             }
                         });
 
+                holder.image_name.setText(model.getTitle());
+
 
                 holder.setItemClickListener(new ItemClickListener() {
                     @Override

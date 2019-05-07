@@ -42,7 +42,7 @@
         android:hint="Email"
         android:inputType="textPersonName"
         android:textColor="#FFFFFFFF"
-        android:textColorHint="#A3A0A0"
+        android:textColorHint="#A39F9F"
         android:textColorLink="#FFFFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -60,7 +60,7 @@
         android:inputType="textPassword"
         android:textColor="#F5F2F2"
         android:textColorHighlight="#FAFAFA"
-        android:textColorHint="#AAA3A3"
+        android:textColorHint="#A39F9F"
         android:textColorLink="#FFFFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
@@ -93,16 +93,15 @@
 
     <Button
         android:id="@+id/gAccount"
-        android:layout_width="226dp"
-        android:layout_height="44dp"
+        android:layout_width="225dp"
+        android:layout_height="41dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="12dp"
-        android:layout_marginEnd="96dp"
+        android:layout_marginEnd="8dp"
         android:background="#50000000"
         android:text="Sign up with Google Account"
         android:textColor="#fff"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signin" />
 

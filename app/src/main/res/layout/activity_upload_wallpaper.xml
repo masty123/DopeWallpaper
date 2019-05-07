@@ -35,7 +35,7 @@
             android:hint="Enter Your Description"
             android:textColor="@color/browser_actions_bg_grey"
             android:textColorHighlight="@color/browser_actions_bg_grey"
-            android:textColorHint="@color/browser_actions_bg_grey"
+            android:textColorHint="#A39F9F"
             android:textColorLink="@color/browser_actions_bg_grey" />
 
         <EditText
@@ -45,7 +45,7 @@
             android:hint="Your Author Name"
             android:textColor="@color/browser_actions_bg_grey"
             android:textColorHighlight="@color/browser_actions_bg_grey"
-            android:textColorHint="@color/browser_actions_bg_grey"
+            android:textColorHint="#A39F9F"
             android:textColorLink="@color/browser_actions_bg_grey" />
 
 
@@ -72,7 +72,7 @@
                 android:layout_weight="1"
                 android:enabled="false"
                 android:text="Upload"
-                android:textColor="#FFFFFFFF"/>
+                android:textColor="#000000" />
 
 
         </LinearLayout>

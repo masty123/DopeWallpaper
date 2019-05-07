@@ -33,7 +33,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/browser_actions_text_color"
-                    android:contentDescription="DopeWallpaper"
                     android:scaleType="centerCrop" />
 
                 <android.support.v7.widget.Toolbar
