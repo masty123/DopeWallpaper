@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">@android:color/white</color>
-    <color name="colorPrimaryDark">#CCCCCC</color>
-    <color name="colorAccent">@android:color/background_dark</color>
-    <color name="colorWhite">#FFFFFFFF</color>
-    <color name="black_overlay">#66000000</color>
+    <!--<color name="colorPrimary">@android:color/white</color>-->
+    <!--<color name="colorPrimaryDark">#CCCCCC</color>-->
+    <!--<color name="colorAccent">@android:color/background_dark</color>-->
+    <!--<color name="colorWhite">#FFFFFFFF</color>-->
+    <!--<color name="black_overlay">#66000000</color>-->
+    <!--<color name="colorPrimary">#673AB7</color>-->
+    <color name="colorPrimary">#FFFFFF</color>
+    <color name="colorPrimaryDark">#512DA8</color>
+    <color name="colorPrimaryLight">#EDE7F6</color>
+    <color name="colorAccent">#7C4DFF</color>
+    <color name="colorSecondary">#FFC107</color>
+    <color name="colorWhite">#FFFFFF</color>
 </resources>

@@ -35,7 +35,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:text="DopeWallpaper"
-        android:textColor="@color/colorWhite"
+        android:textColor="@color/colorPrimary"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

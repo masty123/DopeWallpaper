@@ -5,6 +5,7 @@
     android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:textColor="@color/colorWhite"
     android:background="@color/common_google_signin_btn_text_dark_focused"
     tools:context=".ViewWallpaper">
 
@@ -75,7 +76,7 @@
                         android:layout_marginTop="12dp"
                         android:padding="12dp"
                         android:text="Wallpaper title"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/colorWhite"
                         android:textSize="20sp" />
 
                     <TextView
@@ -85,7 +86,7 @@
                         android:layout_marginTop="12dp"
                         android:padding="12dp"
                         android:text="Resolution"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/colorWhite"
                         android:textSize="20sp" />
 
                     <TextView
@@ -95,7 +96,7 @@
                         android:layout_marginTop="12dp"
                         android:padding="12dp"
                         android:text="Author"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/colorWhite"
                         android:textSize="20sp" />
 
 
