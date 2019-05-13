@@ -47,9 +47,12 @@ public class SignIn extends AppCompatActivity {
         signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String getemail = email.getText().toString();
-                String getpassword = password.getText().toString();
-                callSignin(getemail, getpassword);
+                if(!email.getText().toString().equals("") && !password.getText().toString().equals("")){
+                    String getemail = email.getText().toString();
+                    String getpassword = password.getText().toString();
+                    callSignin(getemail, getpassword);
+                }
+
             }
         });
 
@@ -57,10 +60,11 @@ public class SignIn extends AppCompatActivity {
             @Override
 
             public void onClick(View v) {
+                if(!email.getText().toString().equals("") && !password.getText().toString().equals("")){
                 String getemail = email.getText().toString();
                 String getpassword = password.getText().toString();
                 callSignup(getemail, getpassword);
-
+                }
             }
         });
 
