@@ -15,7 +15,7 @@
 ![Screenshot](/image/preview5.png)
 
 # Workflow Diagram
-![Screenshot](/image/Workflow Diagram.png)
+![Screenshot](/image/WorkflowDiagram.png)
 
 ## Specification
 ### Database: Firebase
